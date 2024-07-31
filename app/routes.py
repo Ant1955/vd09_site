@@ -43,9 +43,23 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/click')
+@app.route('/clickp')
 @login_required
-def click():
+def clickp():
     current_user.clicks += 1
+    db.session.commit()
+    return redirect(url_for('index'))
+
+@app.route('/clickm')
+@login_required
+def clickm():
+    current_user.clicks -= 1
+    db.session.commit()
+    return redirect(url_for('index'))
+
+@app.route('/clickr')
+@login_required
+def clickr():
+    current_user.clicks = 0
     db.session.commit()
     return redirect(url_for('index'))
